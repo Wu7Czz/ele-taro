@@ -1,0 +1,32 @@
+@import '../../styles/mixin';
+@import "~taro-ui/dist/style/components/divider.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/input-number.scss";
+@import "~taro-ui/dist/style/components/checkbox.scss";
+@import "~taro-ui/dist/style/components/calendar.scss";
+.order-page {
+	padding: 20px;
+	.page-section {
+		padding: 12px;
+		margin: 24px 0px 0px;
+		border-bottom: 1px solid #ccc;
+		.picker {
+			@include fj();
+		}
+	}
+	.dates-picker{
+		@include fj();
+	}
+	.weekend-select{
+		margin: 0;
+		.at-checkbox{
+			@include fj(space-around);
+		}
+		.at-checkbox__option-wrap::after, .at-checkbox::before, .at-checkbox::after{
+			border: none;
+		}
+	}
+	.fj {
+		@include fj();
+	}
+}

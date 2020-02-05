@@ -1,0 +1,21 @@
+@import '../../styles/mixin';
+.pre-row {
+    font-size: 1.1em;
+    padding: 4px 4px 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ccc;
+    @include fj();
+    .pre-single {
+        flex: 1;
+        text-align: center;
+    }
+    .color-breakfast {
+        color: $color-breakfast;
+    }
+    .color-lunch {
+        color: $color-lunch;
+    }
+    .color-supper {
+        color: $color-supper;
+    }
+}

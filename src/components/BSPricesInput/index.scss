@@ -1,0 +1,9 @@
+@import '../../styles/mixin';
+@import "~taro-ui/dist/style/components/input-number.scss";
+@import "~taro-ui/dist/style/components/switch.scss";
+.prices-input {
+  @include fj();
+}
+.single-input {
+  text-align: center;
+}
