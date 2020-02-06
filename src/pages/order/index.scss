@@ -14,18 +14,6 @@
 			@include fj();
 		}
 	}
-	.dates-picker{
-		@include fj();
-	}
-	.weekend-select{
-		margin: 0;
-		.at-checkbox{
-			@include fj(space-around);
-		}
-		.at-checkbox__option-wrap::after, .at-checkbox::before, .at-checkbox::after{
-			border: none;
-		}
-	}
 	.fj {
 		@include fj();
 	}

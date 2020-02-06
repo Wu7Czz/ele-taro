@@ -1,2 +1,14 @@
 @import '../../styles/mixin';
 @import "~taro-ui/dist/style/components/calendar.scss";
+.book-calendar{
+	.at-checkbox{
+		@include fj(space-around);
+	}
+	.at-checkbox__option-wrap::after, .at-checkbox::before, .at-checkbox::after{
+		border: none!important;
+  }
+  .at-calendar__list.flex .flex__item-extra .extra-marks .mark{
+    width: 32px!important;
+    border-radius: 40%!important;;
+  }
+}

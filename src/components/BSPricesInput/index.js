@@ -5,6 +5,7 @@ import './index.scss';
 
 const BSPricesInput = props => {
   const { prices, setPrices } = props;
+  const disabledInput = true;
   const change = index => value => {
     let _prices = prices.concat();
     if (index != 0) {
@@ -38,7 +39,7 @@ const BSPricesInput = props => {
           min={0}
           max={7.5}
           step={1}
-          disabledInput='{true}'
+          disabledInput={disabledInput}
           value={prices[1]}
           onChange={change(1)}
         />
@@ -49,7 +50,7 @@ const BSPricesInput = props => {
           min={0}
           max={7.5}
           step={1}
-          disabledInput='{true}'
+          disabledInput={disabledInput}
           value={prices[2]}
           onChange={change(2)}
         />

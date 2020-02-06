@@ -19,6 +19,19 @@ export const dateFormat = (fmt="YYYY-mm-dd", date=new Date()) => {
   return fmt;
 }
 
-export const demo = index => {
-  return index+'';
+export const getInnerDates = (start, end) => {
+  const arr = [];
+  const ab = start.split("-");
+  const ae = end.split("-");
+  const db = new Date();
+  db.setUTCFullYear(ab[0], ab[1] - 1, ab[2]);
+  const de = new Date();
+  de.setUTCFullYear(ae[0], ae[1] - 1, ae[2]);
+  const unixDb = db.getTime() - 24 * 60 * 60 * 1000;
+  const unixDe = de.getTime() - 24 * 60 * 60 * 1000;
+  for (let k = unixDb; k <= unixDe;) {
+    k = k + 24 * 60 * 60 * 1000;
+    arr.push(dateFormat("YYYY-mm-dd",new Date(parseInt(k))));
+  }
+  return arr;
 }
