@@ -1,4 +1,5 @@
 @import '../../styles/mixin';
+@import "~taro-ui/dist/style/components/button.scss";
 @import "~taro-ui/dist/style/components/calendar.scss";
 .book-calendar{
 	.at-checkbox{
@@ -10,5 +11,8 @@
   .at-calendar__list.flex .flex__item-extra .extra-marks .mark{
     width: 32px!important;
     border-radius: 40%!important;;
+  }
+  .weekend-select{
+    margin-bottom: 40px;
   }
 }

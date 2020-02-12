@@ -1,6 +1,7 @@
 import Taro,{ useEffect, useState } from '@tarojs/taro';
 import { View, Text, Picker } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
+import { AtButton } from 'taro-ui'
 import * as indexApi from './service';
 import BSCustmoerPicker from '../../components/BSCustmoerPicker'
 import BSBookCalendar from '../../components/BSBookCalendar'
@@ -15,8 +16,8 @@ const Order = props =>{
   const [tempDates, setTempDates] = useState([dateFormat()]);
   const [ finalDates, setFinalDates ] = useState([]);
   const _setCustomer = value => {
+    console.log(value)
     setCustomer(value);
-    getCustomerOrderInfo(value.id)
   }
   const _setPrices = value => {
     setPrices(value);
@@ -24,21 +25,12 @@ const Order = props =>{
   const _setFinalDates = value => {
     console.log(value)
   }
-  const getCustomerOrderInfo = async function(id){
-    const res = await indexApi.getCustomerOrderInfo({id});
-    console.log(res.data)
-  }
   useEffect(() => {
   }, [])
   return (
     <View className='order-page'>
       <View className='page-section custom-picker'>
         <BSCustmoerPicker customer={customer} setCustomer={_setCustomer} ></BSCustmoerPicker>
-        {
-          customer
-          ? (<Text>截止当前订餐信息</Text>)
-          : null
-        }
       </View>
       <View className='page-section'>
         <BSPricesInput prices={prices} setPrices={_setPrices}></BSPricesInput>

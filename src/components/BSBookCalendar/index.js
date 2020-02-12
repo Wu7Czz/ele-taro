@@ -5,7 +5,7 @@ import { dateFormat, getInnerDates } from '../../utils'
 import './index.scss';
 
 const BSBookCalendar = props => {
-  const { tempDates, setFinalDates } = props;
+  const { tempDates, setFinalDates, minDate } = props;
   const [weekendSelect, setWeekendSelect] = useState([6]);
   const [currentDate, setCurrentDate] = useState();
   const [ marks, setMarks ] = useState([]);
@@ -76,6 +76,7 @@ const BSBookCalendar = props => {
       </View>
       <AtCalendar
         isMultiSelect
+        minDate={minDate}
         marks={marks}
         isSwiper={isSwiper}
         currentDate={currentDate}

@@ -1,6 +1,8 @@
 import Taro, { useState, useEffect }from '@tarojs/taro';
-import { connect } from '@tarojs/redux';
+import { AtModal, AtIcon } from "taro-ui"
 import { View, Text , Picker } from '@tarojs/components';
+import { connect } from '@tarojs/redux';
+import * as indexApi from '../../pages/order/service';
 import './index.scss';
 
 const BSCustmoerPicker = props => {
@@ -9,20 +11,35 @@ const BSCustmoerPicker = props => {
   const [ showText, setShowText] = useState();
   const [ selectorIndex, setSelectorIndex] = useState([0, 0, 0]);
   const [ classIndex, setClassIndex] = useState(0);
-
+  const [ showMoal, setShowMoal] = useState(false);
+  const [ showInfoIcon, setShowInfoIcon] = useState(false);
+  const getCustomerOrderInfo = async function(selectRange){
+    setShowInfoIcon(false)
+    setShowMoal(false)
+    const res = await indexApi.getCustomerOrderInfo({id:selectRange[2].id});
+    setCustomer({
+      showName: _handleShowText(selectRange),
+      className: range[1][selectRange[1]].name,
+      gradeName: range[0][selectRange[0]].name,
+      gradeId: range[0][selectRange[0]].id,
+      ...range[2][selectRange[2]],
+      ...res.data
+    })
+    setShowInfoIcon(true)
+  }
+  const _setShowMoal = () => {
+    setShowMoal(true)
+  }
+  const modelClose = () => {
+    setShowMoal(false)
+  }
   const  _handleShowText = (indexs) => {
     return range[0][indexs[0]].name + '-' + range[1][indexs[1]].name + '-' + range[2][indexs[2]].name
   }
   const onChange = e => {
     setSelectorIndex(e.detail.value)
     setShowText(_handleShowText(e.detail.value))
-    setCustomer({
-      ...range[2][e.detail.value[2]],
-      showName: _handleShowText(e.detail.value),
-      className: range[1][e.detail.value[1]].name,
-      gradeName: range[0][e.detail.value[0]].name,
-      gradeId: range[0][e.detail.value[0]].id,
-    })
+    getCustomerOrderInfo(e.detail.value)
   }
   const onColumnChange = e => {
     const index = e.detail.value
@@ -64,12 +81,30 @@ const BSCustmoerPicker = props => {
     }
   }, [user.studentList])
   return (
-    <Picker mode='multiSelector' range={range} rangeKey='name' onChange={onChange} value={selectorIndex} onColumnChange={onColumnChange}>
-      <View className='picker'>
-        <Text>选择人员：</Text>
-        <Text>{showText}</Text>
+    <View className='fj'>
+      <View className='picker-view'>
+        <Picker mode='multiSelector' range={range} rangeKey='name' onChange={onChange} value={selectorIndex} onColumnChange={onColumnChange}>
+          <View className='picker-text'>
+            <Text>选择人员：</Text>
+            <Text>{showText}</Text>
+          </View>
+        </Picker>
       </View>
-    </Picker>
+      <AtModal
+        isOpened={showMoal}
+        title='标题'
+        onClose={modelClose}
+        content='欢迎加入京东凹凸实验室\n\r欢迎加入京东凹凸实验室'
+      />
+      {
+        showInfoIcon
+        ? (<View className='info-icon'>
+            <AtIcon value='alert-circle ' size='24' color='#6190E8' onClick={_setShowMoal}></AtIcon>
+          </View>)
+        : null
+      }
+
+    </View>
   )
 }
 export default connect(({ user, loading })=>({ user,loading }))(BSCustmoerPicker)
